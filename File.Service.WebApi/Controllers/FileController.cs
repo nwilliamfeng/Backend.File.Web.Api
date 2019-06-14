@@ -17,18 +17,8 @@ namespace File.Service.WebApi.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> Upload()
         {
-            var httpRequest = HttpContext.Current.Request;
-            var dir = httpRequest.Headers.GetValues("dir").FirstOrDefault();
-            if (httpRequest.Files.Count == 0)
-                return this.JsonResult(false.ToJson("未找到文件"));
-
-            foreach (string file in httpRequest.Files)
-            {
-                var postFile = httpRequest.Files[file];
-                postFile.
-            //    var serverPath = HttpContext.Current.Server.MapPath("~/" + postFile.FileName);
-                postFile.SaveAs(serverPath);
-            }
+            var result =await FileUploadService.Upload(HttpContext.Current.Request);
+            return this.Json(result);
 
         }
     }
