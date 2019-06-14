@@ -26,7 +26,7 @@ namespace File.Service.WebApi.Controllers
             {
                 var postFile = httpRequest.Files[file];
                 postFile.
-                var serverPath = HttpContext.Current.Server.MapPath("~/" + postFile.FileName);
+            //    var serverPath = HttpContext.Current.Server.MapPath("~/" + postFile.FileName);
                 postFile.SaveAs(serverPath);
             }
 
