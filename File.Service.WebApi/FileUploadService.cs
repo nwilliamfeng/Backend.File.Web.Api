@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 
+
 namespace File.Service.WebApi
 {
     public static class FileUploadService
@@ -22,9 +23,11 @@ namespace File.Service.WebApi
                 foreach (string file in httpRequest.Files)
                 {
                     var postFile = httpRequest.Files[file];
+                    
                     var id = Guid.NewGuid().ToString("N");
                     var path = FileServerConfigurationSection.Instance.WriteDir + dir + "\\" + id;
-
+                //    if (!System.IO.Directory.Exists(path))
+                  //      System.IO.Directory.CreateDirectory();
                     postFile.SaveAs(path);
                     FileInfo fi = new FileInfo { CreateTime = DateTime.Now, Name = postFile.FileName, Url = $"{FileServerConfigurationSection.Instance.Name}\\{dir}\\{id}" };
                     lst.Add(fi);
@@ -34,6 +37,10 @@ namespace File.Service.WebApi
            
         }
 
+        private static string GetFileExtension()
+        {
+            return null;
+        }
 
     }
 }
