@@ -14,8 +14,8 @@ namespace File.Service.WebApi
         {
             return Task.Run(() =>
             {
-                var dir = httpRequest.Headers.GetValues("dir").FirstOrDefault();
-                if (string.IsNullOrEmpty(dir))
+                var subDir = httpRequest.Headers.GetValues("dir").FirstOrDefault();
+                if (string.IsNullOrEmpty(subDir))
                     return new JsonResultData<IEnumerable<FileInfo>>().SetFail("未设置子路径");
                 if (httpRequest.Files.Count == 0)
                     return new JsonResultData<IEnumerable<FileInfo>>().SetFail("找不到文件");
@@ -25,11 +25,20 @@ namespace File.Service.WebApi
                     var postFile = httpRequest.Files[file];
                     
                     var id = Guid.NewGuid().ToString("N");
-                    var path = FileServerConfigurationSection.Instance.WriteDir + dir + "\\" + id;
-                //    if (!System.IO.Directory.Exists(path))
-                  //      System.IO.Directory.CreateDirectory();
+                    var dir = $"{FileServerConfigurationSection.Instance.WriteDir}\\{subDir}";
+                    var extension = postFile.GetFileExtension();
+                    var path = $"{dir}\\{id}{extension}";
+                    if (!System.IO.Directory.Exists(dir))
+                        System.IO.Directory.CreateDirectory(dir);
                     postFile.SaveAs(path);
-                    FileInfo fi = new FileInfo { CreateTime = DateTime.Now, Name = postFile.FileName, Url = $"{FileServerConfigurationSection.Instance.Name}\\{dir}\\{id}" };
+                    FileInfo fi = new FileInfo {
+                        Id = id,
+                        Size=postFile.ContentLength,
+                        CreateTime = DateTime.Now,
+                        Extension =extension,
+                        Name = postFile.FileName,
+                        Url = $"{FileServerConfigurationSection.Instance.Name}\\{subDir}\\{id}{extension}"
+                    };
                     lst.Add(fi);
                 }
                 return new JsonResultData<IEnumerable<FileInfo>> { Data = lst }.SetSuccess();
@@ -37,10 +46,6 @@ namespace File.Service.WebApi
            
         }
 
-        private static string GetFileExtension()
-        {
-            return null;
-        }
-
+      
     }
 }
