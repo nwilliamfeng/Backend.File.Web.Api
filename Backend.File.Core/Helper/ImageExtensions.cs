@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Web;
 
-namespace Backend.File.Web
+namespace Backend.File
 {
     public static class ImageExtensions
     {

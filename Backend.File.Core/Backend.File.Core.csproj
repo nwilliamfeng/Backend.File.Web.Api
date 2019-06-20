@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6D84F2ED-523D-4A90-BD7B-D0BE81431EF4}</ProjectGuid>
+    <ProjectGuid>{FEE92E8F-85D3-414A-96A6-11BF57AAA3ED}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Backend.File.Service</RootNamespace>
-    <AssemblyName>Backend.File.Service</AssemblyName>
+    <RootNamespace>Backend.File.Core</RootNamespace>
+    <AssemblyName>Backend.File.Core</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,39 +30,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Http">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthService.cs" />
-    <Compile Include="FileUploadService.cs" />
+    <Compile Include="FileInfo.cs" />
+    <Compile Include="FileServerConfigurationSection.cs" />
+    <Compile Include="Helper\ImageExtensions.cs" />
+    <Compile Include="Helper\PostFileExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Microcomm.Core\Microcomm.Core\Microcomm.Core.csproj">
-      <Project>{d6c9ecc1-24cb-4b77-88b9-b706e63963b0}</Project>
-      <Name>Microcomm.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Backend.File.Core\Backend.File.Core.csproj">
-      <Project>{fee92e8f-85d3-414a-96a6-11bf57aaa3ed}</Project>
-      <Name>Backend.File.Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Configuration;
 
-namespace Backend.File.Web
+namespace Backend.File
 {
     public class FileServerConfigurationSection:ConfigurationSection
     {

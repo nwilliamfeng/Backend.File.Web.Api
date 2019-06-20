@@ -92,17 +92,9 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\FileController.cs" />
-    <Compile Include="FileServerConfigurationSection.cs" />
-    <Compile Include="FileUploadService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helper\ImageExtensions.cs" />
-    <Compile Include="JsonResultData.cs" />
-    <Compile Include="Helper\JsonResultExtension.cs" />
-    <Compile Include="Helper\JsonResultDataExtension.cs" />
-    <Compile Include="Models\FileInfo.cs" />
-    <Compile Include="Helper\PostFileExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +118,10 @@
     <ProjectReference Include="..\..\Microcomm.WebApi\Microcomm.WebApi\Microcomm.WebApi.csproj">
       <Project>{abb62492-7d53-4a5b-bce1-7b40a01ec6dd}</Project>
       <Name>Microcomm.WebApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Backend.File.Core\Backend.File.Core.csproj">
+      <Project>{fee92e8f-85d3-414a-96a6-11bf57aaa3ed}</Project>
+      <Name>Backend.File.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Backend.File.Service\Backend.File.Service.csproj">
       <Project>{6d84f2ed-523d-4a90-bd7b-d0be81431ef4}</Project>
@@ -153,7 +149,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53870</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:6100/</IISUrl>
+          <IISUrl>http://localhost:6200/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

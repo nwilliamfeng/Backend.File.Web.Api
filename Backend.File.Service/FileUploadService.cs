@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
-using System.Web.Http;
+ 
+using Microcomm ;
 
 
-namespace Backend.File.Web
+namespace Backend.File.Service
 {
-    public static class FileUploadService
+    public class FileUploadService
     {
-        public static   Task<JsonResultData<IEnumerable<FileInfo>>> Upload(HttpRequest httpRequest)
+        public  Task<JsonResultData<IEnumerable<FileInfo>>> Upload(HttpRequest httpRequest)
         {
             return Task.Run(() =>
             {

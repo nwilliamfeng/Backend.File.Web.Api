@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Backend.File.Web
+namespace Backend.File
 {
     public class FileInfo
     {
