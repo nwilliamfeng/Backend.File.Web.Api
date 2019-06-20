@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Microcomm.Web.Http.Filters;
 
 namespace Backend.File.Web
 {
@@ -19,6 +20,9 @@ namespace Backend.File.Web
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.Filters.Add(new GlobalExceptionFilter());
+            config.Filters.Add(new GlobalLogFilter());
         }
     }
 }

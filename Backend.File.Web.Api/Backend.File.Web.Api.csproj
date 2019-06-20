@@ -53,12 +53,6 @@
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="Microcomm.Core, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microcomm.Core.1.0.0.3\lib\net462\Microcomm.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microcomm.WebApi, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microcomm.WebApi.1.0.0.6\lib\net462\Microcomm.WebApi.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -124,7 +118,20 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Microcomm.Core\Microcomm.Core\Microcomm.Core.csproj">
+      <Project>{d6c9ecc1-24cb-4b77-88b9-b706e63963b0}</Project>
+      <Name>Microcomm.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Microcomm.WebApi\Microcomm.WebApi\Microcomm.WebApi.csproj">
+      <Project>{abb62492-7d53-4a5b-bce1-7b40a01ec6dd}</Project>
+      <Name>Microcomm.WebApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Backend.File.Service\Backend.File.Service.csproj">
+      <Project>{6d84f2ed-523d-4a90-bd7b-d0be81431ef4}</Project>
+      <Name>Backend.File.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
@@ -146,7 +153,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53870</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:7676/</IISUrl>
+          <IISUrl>http://localhost:6100/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
