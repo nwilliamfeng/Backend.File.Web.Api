@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 
-namespace File.Service.WebApi.Controllers
+namespace Backend.File.Web.Controllers
 {
     public class FileController : ApiController
     {

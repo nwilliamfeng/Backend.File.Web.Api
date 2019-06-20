@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Configuration;
 
-namespace File.Service.WebApi
+namespace Backend.File.Web
 {
     public class FileServerConfigurationSection:ConfigurationSection
     {

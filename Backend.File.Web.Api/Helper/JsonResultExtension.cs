@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.Results;
 
-namespace File.Service.WebApi
+namespace Backend.File.Web
 {
     public static class JsonResultExtension
     {

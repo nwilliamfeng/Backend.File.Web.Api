@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Http;
 
 
-namespace File.Service.WebApi
+namespace Backend.File.Web
 {
     public static class FileUploadService
     {

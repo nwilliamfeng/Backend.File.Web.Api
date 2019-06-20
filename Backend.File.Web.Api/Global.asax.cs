@@ -7,7 +7,7 @@ using System.Web.Http;
 
 using System.Web.Routing;
 
-namespace File.Service.WebApi
+namespace Backend.File.Web
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
