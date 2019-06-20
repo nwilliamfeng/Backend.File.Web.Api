@@ -9,6 +9,7 @@ using System.Web.Http;
 using Microcomm.Web.Http.Filters;
 using WebApi.OutputCache.V2;
 using Backend.File.Service;
+using System.IO;
 
 namespace Backend.File.Web.Controllers
 {
@@ -24,11 +25,32 @@ namespace Backend.File.Web.Controllers
 
      
         [HttpPost]
-        public async Task<IHttpActionResult> Upload()
+        public async Task<IHttpActionResult> UploadByForm()
         {
             var result =await this._fileUploadService.Upload(HttpContext.Current.Request);
             return this.Json(result);
 
         }
+
+        //public HttpResponseMessage DownloadFile()
+        //{
+        //    HttpResponseMessage result = null;
+        //    var localFilePath = HttpContext.Current.Server.MapPath("~/timetable.jpg");
+           
+        //    if (!File.Exists(localFilePath))
+        //    {
+        //        result = Request.CreateResponse(HttpStatusCode.Gone);
+        //    }
+        //    else
+        //    {
+        //        result = Request.CreateResponse(HttpStatusCode.OK);
+        //        result.Content = new StreamContent(new FileStream(localFilePath, FileMode.Open, FileAccess.Read));
+        //        result.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+        //        result.Content.Headers.ContentDisposition.FileName = "SampleImg";
+        //        result.
+        //    }
+
+        //    return result;
+        //}
     }
 }
