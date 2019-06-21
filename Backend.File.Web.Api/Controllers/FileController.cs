@@ -25,18 +25,36 @@ namespace Backend.File.Web.Controllers
 
      
         [HttpPost]
-        public async Task<IHttpActionResult> UploadByForm()
+        public async Task<IHttpActionResult> UploadWithForm()
         {
-            var result =await this._fileUploadService.Upload(HttpContext.Current.Request);
+            var result =await this._fileUploadService.UploadWithForm(HttpContext.Current.Request);
             return this.Json(result);
 
+        }
+
+        [HttpPost]
+        public async Task<IHttpActionResult> Upload()
+        {
+            var streamProvider = new MultipartFormDataStreamProvider(ServerUploadFolder);
+            await Request.Content.ReadAsMultipartAsync(streamProvider);
+
+            return new FileResult
+            {
+                FileNames = streamProvider.FileData.Select(entry => entry.LocalFileName),
+                Names = streamProvider.FileData.Select(entry => entry.Headers.ContentDisposition.FileName),
+                ContentTypes = streamProvider.FileData.Select(entry => entry.Headers.ContentType.MediaType),
+                Description = streamProvider.FormData["description"],
+                CreatedTimestamp = DateTime.UtcNow,
+                UpdatedTimestamp = DateTime.UtcNow,
+                DownloadLink = "TODO, will implement when file is persisited"
+            };
         }
 
         //public HttpResponseMessage DownloadFile()
         //{
         //    HttpResponseMessage result = null;
         //    var localFilePath = HttpContext.Current.Server.MapPath("~/timetable.jpg");
-           
+
         //    if (!File.Exists(localFilePath))
         //    {
         //        result = Request.CreateResponse(HttpStatusCode.Gone);

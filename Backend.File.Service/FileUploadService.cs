@@ -11,7 +11,7 @@ namespace Backend.File.Service
 {
     public class FileUploadService
     {
-        public  Task<JsonResultData<IEnumerable<FileInfo>>> Upload(HttpRequest httpRequest)
+        public  Task<JsonResultData<IEnumerable<FileInfo>>> UploadWithForm(HttpRequest httpRequest)
         {
             return Task.Run(() =>
             {
