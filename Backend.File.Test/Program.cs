@@ -13,7 +13,7 @@ namespace Backend.File.Test
         private static string uploadurl = System.Configuration.ConfigurationManager.AppSettings["uploadUrl"];
         private static string formPath = "/api/file/UploadWithForm";
         private static string uppath = "/api/file/Upload";
-        private static string token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjEzODgwMTYsInVzZXJJZCI6ImZ3IiwidGltZXN0YW1wIjoxNTYxMzQ0ODE2fQ.TSNXwJrukQ7eW5bQ9ukCcG7xxuAsinWOov4JdjFWiPQ";
+        private static string token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjE0MzIwMjQsInVzZXJJZCI6ImZ3IiwidGltZXN0YW1wIjoxNTYxMzg4ODI0fQ.M9JgK8anPXRLG-Nz_1ILJq4MTKTCbhhrlTQ90J_rknA";
 
         static void Main(string[] args)
         {

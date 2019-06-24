@@ -13,15 +13,15 @@ namespace Backend.File.Web
         public static void Register(HttpConfiguration config)
         {
             // Web API 配置和服务
-            ProgressMessageHandler progress = new ProgressMessageHandler();
-            progress.HttpSendProgress += new EventHandler<HttpProgressEventArgs>(HttpSendProgress);
+        //    ProgressMessageHandler progress = new ProgressMessageHandler();
+         //   progress.HttpSendProgress += new EventHandler<HttpProgressEventArgs>(HttpSendProgress);
 
             // Web API 路由
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "api/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
 
