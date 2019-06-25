@@ -32,6 +32,7 @@ namespace Backend.File.Web
         private static void HttpSendProgress(object sender, HttpProgressEventArgs e)
         {
             HttpRequestMessage request = sender as HttpRequestMessage;
+           
             // Do something with the event
             // e.ProgressPercentage, e.TotalBytes, e.BytesTransferred
         }
