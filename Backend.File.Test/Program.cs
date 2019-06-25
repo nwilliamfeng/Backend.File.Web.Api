@@ -13,7 +13,7 @@ namespace Backend.File.Test
         private static string uploadurl = System.Configuration.ConfigurationManager.AppSettings["uploadUrl"];
         private static string formPath = "/api/file/UploadWithForm";
         private static string uppath = "/api/file/Upload";
-        private static string token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjE0MzIwMjQsInVzZXJJZCI6ImZ3IiwidGltZXN0YW1wIjoxNTYxMzg4ODI0fQ.M9JgK8anPXRLG-Nz_1ILJq4MTKTCbhhrlTQ90J_rknA";
+        private static string token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjIwMzE2MzksInVzZXJJZCI6ImZ3IiwidGltZXN0YW1wIjoxNTYxNDI2ODM5fQ.MmYK1RTIwXOP4HPiAY9NsYfWvkRQ9UwVPtr_KqsZ2CA";
 
         static void Main(string[] args)
         {
@@ -49,7 +49,8 @@ namespace Backend.File.Test
                     }
                     Base64File file = Base64File.FromFile(path);
                     file.Dir = "dir2";
-                    var result = new HttpClientUtil(uploadurl).PostWithJson<string>(uppath, file, new Dictionary<string, string> { ["Authorization"] = token  });
+                    
+                    var result = new HttpClientUtil(uploadurl).PostWithJson<JsonResultData<FileInfo>>(uppath, file, new Dictionary<string, string> { ["Authorization"] = token  });
                     Console.WriteLine("the result is :");
                     Console.WriteLine(result.Result);
                 }

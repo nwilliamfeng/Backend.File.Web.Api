@@ -57,6 +57,9 @@ namespace Backend.File.Service
                 if (string.IsNullOrEmpty(file.Dir))
                     return new JsonResultData<FileInfo>().SetFail("未设置子路径");
 
+                if (string.IsNullOrEmpty(file.FileName))
+                    return new JsonResultData<FileInfo>().SetFail("未设置文件名");
+
                 var id = Guid.NewGuid().ToString("N");
                 var dir = $"{FileServerConfigurationSection.Instance.WriteDir}\\{file.Dir}";
                 var extension = file.FileName.Contains('.') ? "." + file.FileName.Split('.').Last() : null;

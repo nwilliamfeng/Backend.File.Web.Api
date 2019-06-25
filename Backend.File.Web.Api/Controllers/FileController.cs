@@ -41,43 +41,6 @@ namespace Backend.File.Web.Controllers
 
         }
 
-        //[HttpPost]
-        //public async Task<IHttpActionResult> Upload(string content)
-        //{
-        //    var streamProvider = new MultipartFormDataStreamProvider(ServerUploadFolder);
-        //    await Request.Content.ReadAsMultipartAsync(streamProvider);
-
-        //    return new FileResult
-        //    {
-        //        FileNames = streamProvider.FileData.Select(entry => entry.LocalFileName),
-        //        Names = streamProvider.FileData.Select(entry => entry.Headers.ContentDisposition.FileName),
-        //        ContentTypes = streamProvider.FileData.Select(entry => entry.Headers.ContentType.MediaType),
-        //        Description = streamProvider.FormData["description"],
-        //        CreatedTimestamp = DateTime.UtcNow,
-        //        UpdatedTimestamp = DateTime.UtcNow,
-        //        DownloadLink = "TODO, will implement when file is persisited"
-        //    };
-        //}
-
-        //public HttpResponseMessage DownloadFile()
-        //{
-        //    HttpResponseMessage result = null;
-        //    var localFilePath = HttpContext.Current.Server.MapPath("~/timetable.jpg");
-
-        //    if (!File.Exists(localFilePath))
-        //    {
-        //        result = Request.CreateResponse(HttpStatusCode.Gone);
-        //    }
-        //    else
-        //    {
-        //        result = Request.CreateResponse(HttpStatusCode.OK);
-        //        result.Content = new StreamContent(new FileStream(localFilePath, FileMode.Open, FileAccess.Read));
-        //        result.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
-        //        result.Content.Headers.ContentDisposition.FileName = "SampleImg";
-        //        result.
-        //    }
-
-        //    return result;
-        //}
+        
     }
 }
