@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace Backend.File.Test2
 {
@@ -22,21 +23,48 @@ namespace Backend.File.Test2
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static string uploadurl = System.Configuration.ConfigurationManager.AppSettings["uploadUrl"];
+        private static string formPath = "/api/file/UploadWithForm";
+        private static string uppath = "/api/file/Upload";
+        private static string token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjIwMzE2MzksInVzZXJJZCI6ImZ3IiwidGltZXN0YW1wIjoxNTYxNDI2ODM5fQ.MmYK1RTIwXOP4HPiAY9NsYfWvkRQ9UwVPtr_KqsZ2CA";
+
+
         public MainWindow()
         {
-            InitializeComponent();
+             InitializeComponent();
+
+           
+
             //https://stackoverflow.com/questions/14597232/asp-net-web-api-client-progressmessagehandler-post-task-stuck-in-winform-app
             //https://stackoverflow.com/questions/20661652/progress-bar-with-httpclient
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
+            this.progressBar.Value = 0;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            var dr =openFileDialog.ShowDialog();
+            if (dr == false)
+                return;
+            ProgressMessageHandler progressHandler = new ProgressMessageHandler();
+            progressHandler.HttpSendProgress += (s, arg) =>
+            {
+                Console.WriteLine("send: " + arg.ProgressPercentage);
+                this.Dispatcher.Invoke(() => this.progressBar.Value = arg.ProgressPercentage);
+            };
 
+            progressHandler.HttpReceiveProgress += (s, arg) =>
+            {
+                Console.WriteLine("receive: " + arg.ProgressPercentage);
+              //  this.Dispatcher.Invoke(() => this.progressBar.Value = arg.ProgressPercentage);
+            };
+            var name = openFileDialog.FileName;
+           var result =await new HttpClientUtil2(uploadurl).Upload(formPath,new string[] { name},new Dictionary<string, string>() {["Authorization"]=token,["dir"]="newDir" },null, progressHandler);
+            this.infoTextBox.Text = result;
         }
 
         private ProgressMessageHandler _progressHandler = new ProgressMessageHandler();
-        private const string SERVICE_URL = "http://www.google.com.au";
-
+      
         private HttpClient GetClient(bool includeProgressHandler = false)
         {
             var handlers = new List<DelegatingHandler>();
@@ -47,37 +75,41 @@ namespace Backend.File.Test2
             }
 
             var client = HttpClientFactory.Create(handlers.ToArray());
-            client.BaseAddress = new Uri(SERVICE_URL);
+            client.BaseAddress = new Uri(uploadurl);
             return client;
         }
 
-        private void PostUsingClient(HttpClient client)
+        //private void PostUsingClient(HttpClient client)
+        //{
+        //    var postTask = client.PostAsJsonAsync("test", new
+        //    {
+        //        Foo = "Bar"
+        //    });
+
+        //    var postResult = postTask.Result;
+
+        //    MessageBox.Show("OK");
+        //}
+
+
+
+        //private void button2_Click(object sender, EventArgs e)
+        //{
+        //    using (var client = GetClient(true))
+        //    {
+        //        PostUsingClient(client);
+        //    }
+        //}
+
+        private Task<HttpResponseMessage> UploadFile(HttpClient client,string FileName)
         {
-            var postTask = client.PostAsJsonAsync("test", new
+            return client.PostAsJsonAsync("test", new
             {
                 Foo = "Bar"
             });
-
-            var postResult = postTask.Result;
-
-            MessageBox.Show("OK");
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            using (var client = GetClient())
-            {
-                PostUsingClient(client);
-            }
-        }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            using (var client = GetClient(true))
-            {
-                PostUsingClient(client);
-            }
-        }
 
         private Task<HttpResponseMessage> PostUsingClient(HttpClient client)
         {
