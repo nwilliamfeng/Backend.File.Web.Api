@@ -18,8 +18,10 @@ namespace Backend.File.Service
                 ["Authorization"] = accessToken,
             };
 
-            var result = await new HttpClientUtil(baseUrl).Get<JsonResultData<bool>>("/api/innerauth/vertify",headers);
-            return result;
+            var result = await new HttpClientUtil(baseUrl).Get<JsonResultData>("/api/innerauth/vertify",headers);
+            if (!(result.Data is bool))
+                return new JsonResultData<bool>().SetFail(result.Message).SetStatusCode(result.StatusCode);
+            return new JsonResultData<bool>().SetStatusCode(result.StatusCode) ;
 
         }
     }

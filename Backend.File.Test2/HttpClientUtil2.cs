@@ -94,7 +94,58 @@ namespace Backend.File.Test2
         //    }
         //}
 
-        public async Task<string> Upload(string path, string[] filePaths, IDictionary<string, string> headers = null, IDictionary<string, string> cookie = null, ProgressMessageHandler progressMessageHandler=null )
+        //public async Task<string> Upload(string path, string[] filePaths, IDictionary<string, string> headers = null, IDictionary<string, string> cookie = null, ProgressMessageHandler progressMessageHandler=null )
+        //{
+        //    foreach (var filePath in filePaths)
+        //        if (!System.IO.File.Exists(filePath))
+        //            throw new ArgumentException("不存在的文件：" + filePath);
+
+        //    var contents = filePaths.Select(filePath => new Tuple<string, byte[]>(Path.GetFileName(filePath), System.IO.File.ReadAllBytes(filePath))).ToList();
+
+        //    var cookieContainer = new CookieContainer();
+        //    using (var handler = new HttpClientHandler() { CookieContainer = cookieContainer })
+        //    using (var client =progressMessageHandler==null?  new HttpClient(handler):HttpClientFactory.Create(handler,progressMessageHandler))
+        //    {
+        //        client.BaseAddress = _baseUrl;
+        //        if (cookie != null)
+        //            cookie.ToList().ForEach(k => cookieContainer.Add(_baseUrl, new Cookie(k.Key, k.Value)));
+        //        if (headers != null)
+        //            headers.ToList().ForEach(x => client.DefaultRequestHeaders.Add(x.Key, x.Value));
+        //        using (var content = new MultipartFormDataContent())
+        //        {
+        //            contents.ForEach(x =>
+        //            {
+        //                var httpContent = new StreamContent(new MemoryStream(x.Item2));
+        //                httpContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(Microcomm. MimeTypeHelper.GetMimeType(Path.GetExtension(x.Item1)));
+        //                content.Add(httpContent, "upload_" + Path.GetFileName(x.Item1), x.Item1);
+        //            });
+
+        //            using (var message = await client.PostAsync(path, content))
+        //            {
+        //                var input = await message.Content.ReadAsStringAsync();
+        //                if (progressMessageHandler != null)
+        //                    progressMessageHandler.Dispose();
+        //                return input;
+        //            }
+        //        }
+        //    }
+        //}
+
+
+        public event EventHandler<HttpProgressEventArgs> SendProgress;
+
+
+        public event EventHandler<HttpProgressEventArgs> ReceiveProgress;
+
+        private ProgressMessageHandler BuildProgressHandle()
+        {
+            var result = new ProgressMessageHandler();
+            result.HttpReceiveProgress += (s, e) => this.ReceiveProgress?.Invoke(this, e);
+            result.HttpSendProgress += (s, e) => this.SendProgress?.Invoke(this, e);
+            return result;
+        }
+
+        public async Task<string> Upload(string path, string[] filePaths, IDictionary<string, string> headers = null, IDictionary<string, string> cookie = null )
         {
             foreach (var filePath in filePaths)
                 if (!System.IO.File.Exists(filePath))
@@ -103,9 +154,11 @@ namespace Backend.File.Test2
             var contents = filePaths.Select(filePath => new Tuple<string, byte[]>(Path.GetFileName(filePath), System.IO.File.ReadAllBytes(filePath))).ToList();
 
             var cookieContainer = new CookieContainer();
+           // using (var progressMessageHandler = BuildProgressHandle()) 
             using (var handler = new HttpClientHandler() { CookieContainer = cookieContainer })
-            using (var client =progressMessageHandler==null?  new HttpClient(handler):HttpClientFactory.Create(handler,progressMessageHandler))
+            using (var client = HttpClientFactory.Create(handler, this.BuildProgressHandle()))
             {
+             
                 client.BaseAddress = _baseUrl;
                 if (cookie != null)
                     cookie.ToList().ForEach(k => cookieContainer.Add(_baseUrl, new Cookie(k.Key, k.Value)));
@@ -116,15 +169,14 @@ namespace Backend.File.Test2
                     contents.ForEach(x =>
                     {
                         var httpContent = new StreamContent(new MemoryStream(x.Item2));
-                        httpContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(Microcomm. MimeTypeHelper.GetMimeType(Path.GetExtension(x.Item1)));
+                        httpContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(Microcomm.MimeTypeHelper.GetMimeType(Path.GetExtension(x.Item1)));
                         content.Add(httpContent, "upload_" + Path.GetFileName(x.Item1), x.Item1);
                     });
 
                     using (var message = await client.PostAsync(path, content))
                     {
                         var input = await message.Content.ReadAsStringAsync();
-                        if (progressMessageHandler != null)
-                            progressMessageHandler.Dispose();
+
                         return input;
                     }
                 }

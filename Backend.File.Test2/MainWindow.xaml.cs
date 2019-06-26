@@ -26,8 +26,8 @@ namespace Backend.File.Test2
         private static string uploadurl = System.Configuration.ConfigurationManager.AppSettings["uploadUrl"];
         private static string formPath = "/api/file/UploadWithForm";
         private static string uppath = "/api/file/Upload";
-        private static string token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjIwMzE2MzksInVzZXJJZCI6ImZ3IiwidGltZXN0YW1wIjoxNTYxNDI2ODM5fQ.MmYK1RTIwXOP4HPiAY9NsYfWvkRQ9UwVPtr_KqsZ2CA";
-
+        //  private static string token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjIwMzE2MzksInVzZXJJZCI6ImZ3IiwidGltZXN0YW1wIjoxNTYxNDI2ODM5fQ.MmYK1RTIwXOP4HPiAY9NsYfWvkRQ9UwVPtr_KqsZ2CA";
+        private static string token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjIxNjg5NzAsInVzZXJJZCI6ImZ3IiwidGltZXN0YW1wIjoxNTYxNTY0MTcwfQ.sZbItuQcg9X6nKWeHJgInozLRNA2woTRYQExzDZbawg";
 
         public MainWindow()
         {
@@ -39,29 +39,56 @@ namespace Backend.File.Test2
             //https://stackoverflow.com/questions/20661652/progress-bar-with-httpclient
         }
 
+        //private async void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    this.progressBar.Value = 0;
+        //    OpenFileDialog openFileDialog = new OpenFileDialog();
+        //    var dr =openFileDialog.ShowDialog();
+        //    if (dr == false)
+        //        return;
+        //    ProgressMessageHandler progressHandler = new ProgressMessageHandler();
+        //    progressHandler.HttpSendProgress += (s, arg) =>
+        //    {
+        //        Console.WriteLine("send: " + arg.ProgressPercentage);
+        //        this.Dispatcher.Invoke(() => this.progressBar.Value = arg.ProgressPercentage);
+        //    };
+
+        //    progressHandler.HttpReceiveProgress += (s, arg) =>
+        //    {
+        //        Console.WriteLine("receive: " + arg.ProgressPercentage);
+        //      //  this.Dispatcher.Invoke(() => this.progressBar.Value = arg.ProgressPercentage);
+        //    };
+        //    var name = openFileDialog.FileName;
+        //   var result =await new HttpClientUtil2(uploadurl).Upload(formPath,new string[] { name},new Dictionary<string, string>() {["Authorization"]=token,["dir"]="newDir" },null, progressHandler);
+        //    this.infoTextBox.Text = result;
+        //}
+
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             this.progressBar.Value = 0;
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            var dr =openFileDialog.ShowDialog();
+            var dr = openFileDialog.ShowDialog();
             if (dr == false)
                 return;
-            ProgressMessageHandler progressHandler = new ProgressMessageHandler();
-            progressHandler.HttpSendProgress += (s, arg) =>
+           
+            var name = openFileDialog.FileName;
+            var httpClient = new HttpClientUtil2(uploadurl);
+            httpClient.SendProgress+= (s, arg) =>
             {
                 Console.WriteLine("send: " + arg.ProgressPercentage);
                 this.Dispatcher.Invoke(() => this.progressBar.Value = arg.ProgressPercentage);
             };
 
-            progressHandler.HttpReceiveProgress += (s, arg) =>
+            httpClient.ReceiveProgress+= (s, arg) =>
             {
                 Console.WriteLine("receive: " + arg.ProgressPercentage);
-              //  this.Dispatcher.Invoke(() => this.progressBar.Value = arg.ProgressPercentage);
+                //  this.Dispatcher.Invoke(() => this.progressBar.Value = arg.ProgressPercentage);
             };
-            var name = openFileDialog.FileName;
-           var result =await new HttpClientUtil2(uploadurl).Upload(formPath,new string[] { name},new Dictionary<string, string>() {["Authorization"]=token,["dir"]="newDir" },null, progressHandler);
+
+            var result = await new HttpClientUtil2(uploadurl).Upload(formPath, new string[] { name }, new Dictionary<string, string>() { ["Authorization"] = token, ["dir"] = "newDir" });
             this.infoTextBox.Text = result;
         }
+
 
         private ProgressMessageHandler _progressHandler = new ProgressMessageHandler();
       
@@ -78,28 +105,7 @@ namespace Backend.File.Test2
             client.BaseAddress = new Uri(uploadurl);
             return client;
         }
-
-        //private void PostUsingClient(HttpClient client)
-        //{
-        //    var postTask = client.PostAsJsonAsync("test", new
-        //    {
-        //        Foo = "Bar"
-        //    });
-
-        //    var postResult = postTask.Result;
-
-        //    MessageBox.Show("OK");
-        //}
-
-
-
-        //private void button2_Click(object sender, EventArgs e)
-        //{
-        //    using (var client = GetClient(true))
-        //    {
-        //        PostUsingClient(client);
-        //    }
-        //}
+ 
 
         private Task<HttpResponseMessage> UploadFile(HttpClient client,string FileName)
         {
