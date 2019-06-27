@@ -17,5 +17,7 @@ namespace Backend.File.Data
         Task<bool> Delete(string id);
 
         Task<FileInfo> Load(string id);
+
+        Task<>
     }
 }
