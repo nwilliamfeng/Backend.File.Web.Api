@@ -29,5 +29,7 @@ namespace Backend.File
         public string FileName { get; set; }
 
         public string Base64Content { get; set; }
+
+        public long Expire { get; set; } = 0;
     }
 }

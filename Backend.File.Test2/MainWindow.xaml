@@ -13,11 +13,20 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel VerticalAlignment="Center">
-            <Button Content="upload" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="10 5" Click="Button_Click"/>
-            <ProgressBar x:Name="progressBar" Height="5" Margin="0,10" Width="300"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="UploadFile："/>
+                <ProgressBar x:Name="sendProgressBar" Height="10" Margin="10,0" Width="300" VerticalAlignment="Center"/>
+                <Button Content="upload" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="10 5" Click="Button_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,10">
+                <TextBlock Text="DownloadFile："/>
+                <ProgressBar x:Name="downLoadProgressBar" Height="10" Margin="10,0" Width="300" VerticalAlignment="Center"/>
+                <TextBox  Margin="10,0" x:Name="downLoadUrlTextBox" MinWidth="200"/>
+                <Button Content="download" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="10 5" Click="DownloadButton_Click"/>
+            </StackPanel>
             
         </StackPanel>
-        <TextBox  MinLines="20" x:Name="infoTextBox" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  TextWrapping="Wrap"/>
+        <TextBox  MinLines="20" x:Name="infoTextBox" Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
         <StatusBar Grid.Row="2" Height="24">
             <StatusBarItem x:Name="infoStatusBarItem"/>
         </StatusBar>

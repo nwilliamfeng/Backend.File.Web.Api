@@ -44,6 +44,7 @@
     <Compile Include="FileServerConfigurationSection.cs" />
     <Compile Include="Helper\ImageExtensions.cs" />
     <Compile Include="Helper\PostFileExtension.cs" />
+    <Compile Include="IFileInfoRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -51,6 +52,9 @@
       <Project>{d6c9ecc1-24cb-4b77-88b9-b706e63963b0}</Project>
       <Name>Microcomm.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

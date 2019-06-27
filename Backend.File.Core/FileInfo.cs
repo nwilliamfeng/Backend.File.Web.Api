@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microcomm;
 
 namespace Backend.File
 {
@@ -19,6 +20,11 @@ namespace Backend.File
         public string Url { get; set; }
 
         public DateTime CreateTime { get; set; }
+
+
+        public int Expire { get; set; }
+
+       // public bool IsExire => DateTimeUtils.ToUnixTime(DateTime.Now) - DateTimeUtils.ToUnixTime(this.CreateTime) > Expire;
 
        
 
