@@ -7,7 +7,7 @@
     <ProjectGuid>{FEE92E8F-85D3-414A-96A6-11BF57AAA3ED}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Backend.File.Core</RootNamespace>
+    <RootNamespace>Backend.File</RootNamespace>
     <AssemblyName>Backend.File.Core</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Base64File.cs" />
     <Compile Include="FileInfo.cs" />
+    <Compile Include="FileInfoQueryCondition.cs" />
     <Compile Include="FileServerConfigurationSection.cs" />
     <Compile Include="Helper\ImageExtensions.cs" />
     <Compile Include="Helper\PostFileExtension.cs" />

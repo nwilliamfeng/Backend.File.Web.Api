@@ -14,17 +14,17 @@ namespace Backend.File
 
         }
 
-        public static Base64File FromFile(string filePath,string dir=null)
+        public static Base64File FromFile(string filePath,string category)
         {
             if (!System.IO.File.Exists(filePath))
                 return null;
             return new Base64File {FileName= System.IO.Path.GetFileName(filePath)
                 , Base64Content = Convert.ToBase64String(System.IO.File.ReadAllBytes(filePath))
-            ,Dir=dir};
+            ,Category=category};
         }
 
 
-        public string Dir { get; set; }
+        public string Category { get; set; }
 
         public string FileName { get; set; }
 

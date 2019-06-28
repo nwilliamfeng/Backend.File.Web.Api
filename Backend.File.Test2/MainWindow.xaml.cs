@@ -68,11 +68,14 @@ namespace Backend.File.Test2
            
             var name = openFileDialog.FileName;
            
-            var result = await this._uploadhttpClient.Upload(formPath, new string[] { name }, new Dictionary<string, string>() { ["Authorization"] = token, ["dir"] = "newDir" });
+            var result = await this._uploadhttpClient.Upload(formPath, new string[] { name }, new Dictionary<string, string>() { ["Authorization"] = token, ["category"] = "newDir" });
             this.infoTextBox.Text = result;
         }
 
- 
+        private async void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+           
+        }
 
 
 

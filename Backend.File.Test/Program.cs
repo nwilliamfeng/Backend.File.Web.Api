@@ -47,9 +47,9 @@ namespace Backend.File.Test
                         Console.WriteLine("不存在的文件");
                         break;
                     }
-                    Base64File file = Base64File.FromFile(path);
-                    file.Dir = "dir2";
-                    
+                  
+                    Base64File file = Base64File.FromFile(path,"dir2");
+                   
                     var result = new HttpClientUtil(uploadurl).PostWithJson<JsonResultData<FileInfo>>(uppath, file, new Dictionary<string, string> { ["Authorization"] = token  });
                     Console.WriteLine("the result is :");
                     Console.WriteLine(result.Result);
@@ -76,7 +76,7 @@ namespace Backend.File.Test
                         Console.WriteLine("不存在的文件");
                         break;
                     }
-                    var result = new HttpClientUtil(uploadurl).Upload(formPath, paths, new Dictionary<string, string> { ["Authorization"] = token, ["dir"] = "dir2" });
+                    var result = new HttpClientUtil(uploadurl).Upload(formPath, paths, new Dictionary<string, string> { ["Authorization"] = token, ["category"] = "dir2" });
                     Console.WriteLine("the result is :");
                     Console.WriteLine(result.Result);
                 }

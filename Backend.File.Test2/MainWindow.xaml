@@ -6,29 +6,59 @@
         xmlns:local="clr-namespace:Backend.File.Test2"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.3*"/>
-            <RowDefinition Height="0.7*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <StackPanel VerticalAlignment="Center">
-            <StackPanel Orientation="Horizontal">
+    <Border Padding="10,5">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.3*"/>
+                <RowDefinition Height="0.2*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+              
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Category:"/>
+                    <TextBox MinWidth="200" x:Name="categoryTextBox" Margin="10,0"/>
+                    <Button Content="Search" Click="SearchButton_Click"/>
+                </StackPanel>
+                <DataGrid x:Name="dataGrid" Grid.Row="1" Margin="10" AutoGenerateColumns="True"/>
+
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="Auto"/>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
                 <TextBlock Text="UploadFile："/>
-                <ProgressBar x:Name="sendProgressBar" Height="10" Margin="10,0" Width="300" VerticalAlignment="Center"/>
-                <Button Content="upload" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="10 5" Click="Button_Click"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,10">
-                <TextBlock Text="DownloadFile："/>
-                <ProgressBar x:Name="downLoadProgressBar" Height="10" Margin="10,0" Width="300" VerticalAlignment="Center"/>
-                <TextBox  Margin="10,0" x:Name="downLoadUrlTextBox" MinWidth="200"/>
-                <Button Content="download" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="10 5" Click="DownloadButton_Click"/>
-            </StackPanel>
-            
-        </StackPanel>
-        <TextBox  MinLines="20" x:Name="infoTextBox" Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
-        <StatusBar Grid.Row="2" Height="24">
-            <StatusBarItem x:Name="infoStatusBarItem"/>
-        </StatusBar>
-    </Grid>
+                <ProgressBar x:Name="sendProgressBar" Height="10" Margin="10,0"   Grid.Column="1"  />
+                <Button Content="upload" VerticalAlignment="Center" Grid.Column="3" HorizontalAlignment="Center" Padding="10 5" Click="Button_Click" Width="80"/>
+
+                <TextBlock Text="DownloadFile：" Grid.Row="2"/>
+                <ProgressBar x:Name="downLoadProgressBar" Height="10" Margin="10,0"   Grid.Row="2" Grid.Column="1"/>
+                <TextBox  Margin="10,0" x:Name="downLoadUrlTextBox" MinWidth="200" Grid.Row="2" Grid.Column="2"/>
+                <Button Content="download" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="10 5" Click="DownloadButton_Click" Grid.Row="2" Grid.Column="3" Width="80"/>
+
+            </Grid>
+
+            <TextBox  MinLines="20" x:Name="infoTextBox" Grid.Row="2"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+            <StatusBar Grid.Row="3" Height="24">
+                <StatusBarItem x:Name="infoStatusBarItem"/>
+            </StatusBar>
+        </Grid>
+    </Border>
+    
 </Window>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microcomm.Model;
 
 namespace Backend.File.Data
 {
@@ -18,6 +19,6 @@ namespace Backend.File.Data
 
         Task<FileInfo> Load(string id);
 
-        Task<>
+        Task<QueryResult<FileInfo>> Search(FileInfoQueryCondition queryCondition);
     }
 }

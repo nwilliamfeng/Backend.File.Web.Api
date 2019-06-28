@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend.File.Data.Redis", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend.File.Data.MySql", "Backend.File.Data.MySql\Backend.File.Data.MySql.csproj", "{D9D291F2-1C73-4C7A-9D5D-FD9438E4EB78}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microcomm.Redis", "..\Microcomm.Redis\Microcomm.Redis\Microcomm.Redis.csproj", "{688280DC-50A4-40AC-821A-AFA9EFC26AFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{D9D291F2-1C73-4C7A-9D5D-FD9438E4EB78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9D291F2-1C73-4C7A-9D5D-FD9438E4EB78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9D291F2-1C73-4C7A-9D5D-FD9438E4EB78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{688280DC-50A4-40AC-821A-AFA9EFC26AFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{688280DC-50A4-40AC-821A-AFA9EFC26AFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{688280DC-50A4-40AC-821A-AFA9EFC26AFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{688280DC-50A4-40AC-821A-AFA9EFC26AFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

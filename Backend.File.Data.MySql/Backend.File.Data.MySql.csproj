@@ -40,6 +40,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Microcomm.Core\Microcomm.Core\Microcomm.Core.csproj">
+      <Project>{D6C9ECC1-24CB-4B77-88B9-B706E63963B0}</Project>
+      <Name>Microcomm.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Backend.File.Core\Backend.File.Core.csproj">
       <Project>{fee92e8f-85d3-414a-96a6-11bf57aaa3ed}</Project>
       <Name>Backend.File.Core</Name>

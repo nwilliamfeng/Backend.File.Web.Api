@@ -14,7 +14,7 @@ namespace Backend.File.Web
     {
         protected void Application_Start()
         {
-            //EM.Management.Data.Redis.RedisCache.ConfigName = "RedisServer";
+            Backend.File.Data.Redis.RedisCache.ConfigName = "RedisServer";
             
             AutofacWebapiConfig.Initialize(this, GlobalConfiguration.Configuration, "Backend.File", new string[] { "Repository", "Cache", "Service" });
             GlobalConfiguration.Configure(WebApiConfig.Register);

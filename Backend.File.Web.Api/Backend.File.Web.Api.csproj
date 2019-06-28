@@ -123,6 +123,14 @@
       <Project>{fee92e8f-85d3-414a-96a6-11bf57aaa3ed}</Project>
       <Name>Backend.File.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Backend.File.Data.MySql\Backend.File.Data.MySql.csproj">
+      <Project>{d9d291f2-1c73-4c7a-9d5d-fd9438e4eb78}</Project>
+      <Name>Backend.File.Data.MySql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Backend.File.Data.Redis\Backend.File.Data.Redis.csproj">
+      <Project>{48165fc9-31f1-40ff-a220-d1f39b10a374}</Project>
+      <Name>Backend.File.Data.Redis</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Backend.File.Service\Backend.File.Service.csproj">
       <Project>{6d84f2ed-523d-4a90-bd7b-d0be81431ef4}</Project>
       <Name>Backend.File.Service</Name>

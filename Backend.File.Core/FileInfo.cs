@@ -11,6 +11,9 @@ namespace Backend.File
     {
         public string Id { get; set; }
 
+        public string Category { get; set; }
+
+
         public int Size { get; set; }
 
         public string Name { get; set; }
