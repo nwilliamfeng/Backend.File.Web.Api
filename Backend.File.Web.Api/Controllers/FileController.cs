@@ -9,7 +9,6 @@ using System.Web.Http;
 using Microcomm.Web.Http.Filters;
 using WebApi.OutputCache.V2;
 using Backend.File.Service;
-using System.IO;
 using Microcomm;
 using Microcomm.Web.Http;
 

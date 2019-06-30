@@ -18,10 +18,10 @@ namespace Backend.File
 
         public override bool Equals(object obj)
         {
-            if (!(obj is FileInfoQueryCondition))
-                return false;
             var other = obj as FileInfoQueryCondition;
-
+            if (other==null)
+                return false;
+          
             if (this.Category != other.Category)
                 return false;
       

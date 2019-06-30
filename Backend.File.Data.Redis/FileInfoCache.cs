@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Microcomm.Model;
 using Microcomm;
@@ -17,7 +16,6 @@ namespace Backend.File.Data.Redis
 
         private string GetSortedSetKey(string category) => "sortedSet_" + category;
 
-
         public async Task<bool> Add(FileInfo file)
         {
             var result = await this.Database.HashSetAsync(KEY, file.Id, JsonConvert.SerializeObject(file));
@@ -32,16 +30,16 @@ namespace Backend.File.Data.Redis
             var file = await this.Load(id);
             if (file == null)
                 return false;
-            bool result= await this.Database.HashDeleteAsync(KEY, id);
+            bool result = await this.Database.HashDeleteAsync(KEY, id);
             if (!result)
                 return false;
-            result=await this.Database.SortedSetRemoveAsync(this.GetSortedSetKey(file.Category), id);
+            result = await this.Database.SortedSetRemoveAsync(this.GetSortedSetKey(file.Category), id);
             return result;
         }
 
         public async Task<FileInfo> Load(string id)
         {
-            var value = await this.Database.HashGetAsync(KEY, id);          
+            var value = await this.Database.HashGetAsync(KEY, id);
             return JsonConvert.DeserializeObject<FileInfo>(value);
         }
 
@@ -63,10 +61,10 @@ namespace Backend.File.Data.Redis
                 };
             }
             else
-            {                
+            {
                 var start = queryCondition.StartTime.ToTimeStamp();
                 var end = queryCondition.EndTime.ToTimeStamp();
-                var total = await this.Database.SortedSetLengthAsync(sortKey,start,end);
+                var total = await this.Database.SortedSetLengthAsync(sortKey, start, end);
                 //var ids=this.Database.SortedSetRangeByScore(sortKey,
                 //    start,
                 //    end,
@@ -77,12 +75,12 @@ namespace Backend.File.Data.Redis
                 //    );
 
                 var ids = this.Database.SortedSetRangeByScorePaging(sortKey,
-                 start,
-                 end,
-                 Exclude.None,
-                 order,
-                 queryCondition.PageIndex * queryCondition.PageSize,
-                 queryCondition.PageSize - 1
+                    start,
+                    end,
+                    queryCondition.PageIndex,
+                    queryCondition.PageSize,
+                    Exclude.None,
+                    order
                  );
 
                 return new QueryResult<FileInfo>
@@ -91,7 +89,7 @@ namespace Backend.File.Data.Redis
                     Items = await this.LoadFileInfos(ids)
                 };
             }
-           
+
         }
 
         private async Task<List<FileInfo>> LoadFileInfos(RedisValue[] ids)
