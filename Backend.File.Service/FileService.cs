@@ -27,13 +27,13 @@ namespace Backend.File.Service
         public async Task<QueryResult<FileInfo>> Search(FileInfoQueryCondition queryCondition)
         {
             var result= await this.Cache.Search(queryCondition);
-            if (result != null)
-            {
-                if(result.Items!=null && result.Items.Any(x=> x.Expire > 0 && this.IsExpire(x))) //处理过期的文件
-                {
-                    result.Items = result.Items.Where(x => x.Expire == 0 || !this.IsExpire(x)).ToList();
-                };
-            }
+            //if (result != null)
+            //{
+            //    if(result.Items!=null && result.Items.Any(x=> x.Expire > 0 && this.IsExpire(x))) //处理过期的文件
+            //    {
+            //        result.Items = result.Items.Where(x => x.Expire == 0 || !this.IsExpire(x)).ToList();
+            //    };
+            //}
             return result;
         }
 

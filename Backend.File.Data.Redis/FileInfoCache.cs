@@ -45,6 +45,7 @@ namespace Backend.File.Data.Redis
 
         public async Task<QueryResult<FileInfo>> Search(FileInfoQueryCondition queryCondition)
         {
+            过期逻辑放到这
             if (string.IsNullOrEmpty(queryCondition.Category))
                 return new QueryResult<FileInfo>();
             var sortKey = this.GetSortedSetKey(queryCondition.Category);
@@ -65,23 +66,16 @@ namespace Backend.File.Data.Redis
                 var start = queryCondition.StartTime.ToTimeStamp();
                 var end = queryCondition.EndTime.ToTimeStamp();
                 var total = await this.Database.SortedSetLengthAsync(sortKey, start, end);
-                //var ids=this.Database.SortedSetRangeByScore(sortKey,
-                //    start,
-                //    end,
-                //    Exclude.None,
-                //    order,
-                //    queryCondition.PageIndex * queryCondition.PageSize,
-                //    queryCondition.PageSize-1
-                //    );
 
+           
                 var ids = this.Database.SortedSetRangeByScorePaging(sortKey,
-                    start,
-                    end,
-                    queryCondition.PageIndex,
-                    queryCondition.PageSize,
-                    Exclude.None,
-                    order
-                 );
+                   start,
+                   end,
+                   queryCondition.PageIndex,
+                   queryCondition.PageSize,
+                   Exclude.None,
+                   order
+                );
 
                 return new QueryResult<FileInfo>
                 {

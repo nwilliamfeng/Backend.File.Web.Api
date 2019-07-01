@@ -30,7 +30,6 @@ namespace Backend.File.Web.Controllers
         {
             var result =await this._fileUploadService.UploadWithForm(HttpContext.Current.Request);
             return this.JsonResult(result.ToJsonResultData());
-
         }
 
 
