@@ -45,7 +45,7 @@ namespace Backend.File.Data.Redis
 
         public async Task<QueryResult<FileInfo>> Search(FileInfoQueryCondition queryCondition)
         {
-            过期逻辑放到这
+           // 过期逻辑放到这
             if (string.IsNullOrEmpty(queryCondition.Category))
                 return new QueryResult<FileInfo>();
             var sortKey = this.GetSortedSetKey(queryCondition.Category);
